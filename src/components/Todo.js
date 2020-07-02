@@ -4,7 +4,7 @@ import Input from "./Input"
 import List from "./List"
 
 const Todo = () => {
-  const [list, setList] = useState(['thing1', 'thing2', 'thing3'])
+  const [list, setList] = useState([])
   const [input, setInput] = useState('test')
 
   const handleInputChange = event => {
@@ -13,8 +13,16 @@ const Todo = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    setList([...list, input])
-    setInput("")
+    setList([...list, { content: input, done: false }])
+    setInput('')
+  }
+
+  const handleItemClick = (itemIndex) => {
+    console.log(itemIndex)
+    setList(list.map((el, i) => {
+      if (i !== itemIndex) return el
+      return { ...el, done: !el.done }
+    }))
   }
 
   return (
@@ -24,8 +32,12 @@ const Todo = () => {
           <div className="panel-body">
             <h1>My To Do App</h1>
             <hr/>
-            <List listItems={list} />
-            <Input value={input} onChange={handleInputChange} onSubmit={handleSubmit} />
+            <List handleClick={handleItemClick} listItems={list} />
+            <Input
+              value={input}
+              handleChange={handleInputChange}
+              handleSubmit={handleSubmit}
+            />
           </div>
         </div>
       </div>
