@@ -1,32 +1,34 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
-import Input from "./Input"
-import List from "./List"
+import Input from "./Input";
+import List from "./List";
 
 const Todo = () => {
-  const [list, setList] = useState([])
-  const [input, setInput] = useState('')
+  const [list, setList] = useState([]);
+  const [input, setInput] = useState("");
 
-  const handleInputChange = event => {
-    setInput(event.target.value)
-  }
+  const handleInputChange = (event) => {
+    setInput(event.target.value);
+  };
 
-  const handleFormSubmit = event => {
-    event.preventDefault()
-    setList([...list, { content: input, done: false }])
-    setInput('')
-  }
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setList([...list, { content: input, done: false }]);
+    setInput("");
+  };
 
   const handleItemClick = (itemIndex) => {
-    setList(list.map((el, i) => {
-      if (i !== itemIndex) return el
-      return { ...el, done: !el.done }
-    }))
-  }
+    setList(
+      list.map((el, i) => {
+        if (i !== itemIndex) return el;
+        return { ...el, done: !el.done };
+      })
+    );
+  };
 
   const handleItemDelete = (itemIndex) => {
-    setList(list.filter((el, i) => i !== itemIndex))
-  }
+    setList(list.filter((el, i) => i !== itemIndex));
+  };
 
   return (
     <div className="row">
@@ -34,7 +36,7 @@ const Todo = () => {
         <div className="panel panel-default">
           <div className="panel-body">
             <h1>My To Do App</h1>
-            <hr/>
+            <hr />
             <List
               handleItemClick={handleItemClick}
               handleItemDelete={handleItemDelete}
@@ -49,6 +51,6 @@ const Todo = () => {
         </div>
       </div>
     </div>
-  )
-}
-export default Todo
+  );
+};
+export default Todo;

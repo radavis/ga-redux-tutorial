@@ -1,13 +1,9 @@
-import React from "react"
+import React from "react";
 
 const Input = ({ handleInputChange, handleFormSubmit, value }) => (
   <form onSubmit={handleFormSubmit}>
-    <div
-      className="form-group">
-      <label
-        htmlFor="listInput">
-        Email address
-      </label>
+    <div className="form-group">
+      <label htmlFor="listInput">Email address</label>
       <input
         type="text"
         className="form-control"
@@ -16,12 +12,9 @@ const Input = ({ handleInputChange, handleFormSubmit, value }) => (
         value={value}
         onChange={handleInputChange}
       />
-      <button
-        className="btn btn-primary">
-        Add Item
-      </button>
+      <button className="btn btn-primary">Add Item</button>
     </div>
   </form>
-)
+);
 
-export default Input
+export default Input;
