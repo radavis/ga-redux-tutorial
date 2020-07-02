@@ -1,7 +1,7 @@
 import React from "react"
 
-const Input = ({ handleChange, handleSubmit, value }) => (
-  <form onSubmit={handleSubmit}>
+const Input = ({ handleInputChange, handleFormSubmit, value }) => (
+  <form onSubmit={handleFormSubmit}>
     <div
       className="form-group">
       <label
@@ -14,7 +14,7 @@ const Input = ({ handleChange, handleSubmit, value }) => (
         id="listItemInput"
         placeholder="Add new todo"
         value={value}
-        onChange={handleChange}
+        onChange={handleInputChange}
       />
       <button
         className="btn btn-primary">

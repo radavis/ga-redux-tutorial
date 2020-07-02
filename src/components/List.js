@@ -1,10 +1,10 @@
 import React from "react"
 
-const List = ({ handleClick, listItems }) => {
+const List = ({ handleItemClick, handleItemDelete, listItems }) => {
   const list = listItems.map((el, i) => (
     <li key={i}>
       <span
-        onClick={() => handleClick(i)}
+        onClick={() => handleItemClick(i)}
         style={
           el.done
           ? {textDecoration: 'line-through', fontSize: '20px'}
@@ -13,6 +13,7 @@ const List = ({ handleClick, listItems }) => {
       >
         {el.content}
       </span>
+      <button onClick={() => handleItemDelete(i)} className="btn btn-danger pull-right">x</button>
     </li>
   ))
 

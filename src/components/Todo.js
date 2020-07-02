@@ -5,24 +5,27 @@ import List from "./List"
 
 const Todo = () => {
   const [list, setList] = useState([])
-  const [input, setInput] = useState('test')
+  const [input, setInput] = useState('')
 
   const handleInputChange = event => {
     setInput(event.target.value)
   }
 
-  const handleSubmit = event => {
+  const handleFormSubmit = event => {
     event.preventDefault()
     setList([...list, { content: input, done: false }])
     setInput('')
   }
 
   const handleItemClick = (itemIndex) => {
-    console.log(itemIndex)
     setList(list.map((el, i) => {
       if (i !== itemIndex) return el
       return { ...el, done: !el.done }
     }))
+  }
+
+  const handleItemDelete = (itemIndex) => {
+    setList(list.filter((el, i) => i !== itemIndex))
   }
 
   return (
@@ -32,11 +35,15 @@ const Todo = () => {
           <div className="panel-body">
             <h1>My To Do App</h1>
             <hr/>
-            <List handleClick={handleItemClick} listItems={list} />
+            <List
+              handleItemClick={handleItemClick}
+              handleItemDelete={handleItemDelete}
+              listItems={list}
+            />
             <Input
               value={input}
-              handleChange={handleInputChange}
-              handleSubmit={handleSubmit}
+              handleInputChange={handleInputChange}
+              handleFormSubmit={handleFormSubmit}
             />
           </div>
         </div>
