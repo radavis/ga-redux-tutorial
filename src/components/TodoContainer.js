@@ -4,31 +4,18 @@ import React, { useState } from "react";
 import Input from "./Input";
 import List from "./List";
 
-const TodoContainer = () => {
-  const [list, setList] = useState([]);
-  const [input, setInput] = useState("");
+import { addItem, deleteItem, toggleItem } from "../redux/modules/todoList";
 
-  const handleInputChange = (event) => {
-    setInput(event.target.value);
-  };
+// 'input' is controlled
+// todoList is managed by redux
+
+const TodoContainer = ({ addItem, deleteItem, todoList, toggleItem }) => {
+  const [input, setInput] = useState("");
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setList([...list, { content: input, done: false }]);
+    addItem({ content: input, done: false });
     setInput("");
-  };
-
-  const handleItemClick = (itemIndex) => {
-    setList(
-      list.map((el, i) => {
-        if (i !== itemIndex) return el;
-        return { ...el, done: !el.done };
-      })
-    );
-  };
-
-  const handleItemDelete = (itemIndex) => {
-    setList(list.filter((el, i) => i !== itemIndex));
   };
 
   return (
@@ -39,13 +26,13 @@ const TodoContainer = () => {
             <h1>My To Do App</h1>
             <hr />
             <List
-              onItemClick={handleItemClick}
-              onItemDelete={handleItemDelete}
-              listItems={list}
+              onItemClick={(index) => toggleItem(index)}
+              onItemDelete={(index) => deleteItem(index)}
+              listItems={todoList}
             />
             <Input
               value={input}
-              onInputChange={handleInputChange}
+              onInputChange={(e) => setInput(e.target.value)}
               onFormSubmit={handleFormSubmit}
             />
           </div>
@@ -56,9 +43,13 @@ const TodoContainer = () => {
 };
 
 const mapStateToProps = (state) => ({
-  todo: state.todo,
+  todoList: state.todoList,
 });
 
-const mapDispatchToProps = (dispatch) => {};
+const mapDispatchToProps = (dispatch) => ({
+  addItem: (item) => dispatch(addItem(item)),
+  deleteItem: (index) => dispatch(deleteItem(index)),
+  toggleItem: (index) => dispatch(toggleItem(index)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);

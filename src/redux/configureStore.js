@@ -9,10 +9,10 @@ import {
 // import thunkMiddleware from 'redux-thunk'
 import { createLogger } from "redux-logger";
 
-import todo from "./modules/todo";
+import todoList from "./modules/todoList";
 
 const reducer = combineReducers({
-  todo,
+  todoList,
 });
 
 const loggerMiddleware = createLogger();
