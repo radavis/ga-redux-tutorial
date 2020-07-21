@@ -1,16 +1,16 @@
 import React from "react";
 
-const Input = ({ handleInputChange, handleFormSubmit, value }) => (
-  <form onSubmit={handleFormSubmit}>
+const Input = ({ onInputChange, onFormSubmit, value }) => (
+  <form onSubmit={onFormSubmit}>
     <div className="form-group">
-      <label htmlFor="listInput">Email address</label>
+      <label htmlFor="todoInput">To do:</label>
       <input
         type="text"
         className="form-control"
-        id="listItemInput"
+        id="todoInput"
         placeholder="Add new todo"
         value={value}
-        onChange={handleInputChange}
+        onChange={onInputChange}
       />
       <button className="btn btn-primary">Add Item</button>
     </div>

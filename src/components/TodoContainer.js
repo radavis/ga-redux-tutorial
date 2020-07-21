@@ -1,9 +1,10 @@
+import { connect } from "react-redux";
 import React, { useState } from "react";
 
 import Input from "./Input";
 import List from "./List";
 
-const Todo = () => {
+const TodoContainer = () => {
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
 
@@ -38,14 +39,14 @@ const Todo = () => {
             <h1>My To Do App</h1>
             <hr />
             <List
-              handleItemClick={handleItemClick}
-              handleItemDelete={handleItemDelete}
+              onItemClick={handleItemClick}
+              onItemDelete={handleItemDelete}
               listItems={list}
             />
             <Input
               value={input}
-              handleInputChange={handleInputChange}
-              handleFormSubmit={handleFormSubmit}
+              onInputChange={handleInputChange}
+              onFormSubmit={handleFormSubmit}
             />
           </div>
         </div>
@@ -53,4 +54,11 @@ const Todo = () => {
     </div>
   );
 };
-export default Todo;
+
+const mapStateToProps = (state) => ({
+  todo: state.todo,
+});
+
+const mapDispatchToProps = (dispatch) => {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
